@@ -1,9 +1,9 @@
 package folder;
 import java.awt.*;
-import java.lang.Math;
 
 
-class Shape{
+
+public class Shape{
 
     Point position;
     double lenght;
@@ -11,6 +11,10 @@ class Shape{
     public Shape(Point pos, double len){
         this.position = pos;
         this.lenght = len;
+    }
+
+    public Point getPosition(){
+        return this.position;
     }
 
 }
@@ -55,15 +59,16 @@ class circle extends Shape{
 
         super(pos, len);
         this.radius = len;
+
     }
 
 
-   // public double getArea(){
-    //    double result = 0;
-//
-   //     result = this.radius * this.radius * Math.PI;
-//
-    //    return result;
-    //}
+    public double getArea(){
+        double result = 0;
+
+        result = this.radius * this.radius * Math.PI;
+
+        return result;
+    }
 
 }
