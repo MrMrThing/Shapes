@@ -6,8 +6,9 @@ class Main{
     public static void main(String[] args){
         System.out.println("Shape!");
 
-        Shape thing = new Shape(new Point(2,5),5);
+        circle thing = new circle(new Point(2,5), 4);
 
+        //System.out.println(thing.getArea());
     }
 
 }

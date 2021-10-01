@@ -17,27 +17,23 @@ class Shape{
 
 class triangle extends Shape{
 
-    double lenght1;
-    double lenght2;
-    double lenght3;
+    double lenght;
 
     Point A;
     Point B;
     Point C;
 
-    public triangle(Point pos, double len1, double len2, double len3){
-        super (pos, len1);
+    public triangle(Point pos, double len){
+        super (pos, len);
 
-        this.lenght1 = len1;
-        this.lenght2 = len2;
-        this.lenght3 = len3;
+        this.lenght = len;
 
         this.A = pos;
 
-        double X = math.sqrt(len1 / 2);
-        double Y = math.sqrt(len1 / 2);
+        Double X = Math.sqrt(len / 2);
+        Double Y = Math.sqrt(len / 2);
 
-        this.B = (new Point(X,Y));
+        this.B = (new Point(2,5));
 
     }
 
@@ -48,5 +44,26 @@ class triangle extends Shape{
 
         return result;
     }
+
+}
+
+class circle extends Shape{
+
+    double radius;
+
+    public circle(Point pos, double len){
+
+        super(pos, len);
+        this.radius = len;
+    }
+
+
+   // public double getArea(){
+    //    double result = 0;
+//
+   //     result = this.radius * this.radius * Math.PI;
+//
+    //    return result;
+    //}
 
 }
