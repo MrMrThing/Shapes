@@ -18,6 +18,8 @@ public abstract class Shape{
         return this.position;
     }
 
+    //Using abstract, to creat methods, that all sub classes shall have
+    //without going into the different calculations here
     public abstract double getArea();
 
     public abstract double getCircumference();
@@ -26,9 +28,13 @@ public abstract class Shape{
 
     public abstract Point getCenter();
 
-    public abstract double getEuclidean(Point pos);
+    public abstract double getEuclidean(Shape shape);
 
 }
+
+//
+//-------------------------------------------------------------------------------------
+//
 
 class triangle extends Shape{
 
@@ -38,6 +44,7 @@ class triangle extends Shape{
     Point B;
     Point C;
 
+    //initializer the triangle class
     public triangle(Point pos, Integer len){
         super (pos, len);
 
@@ -45,6 +52,9 @@ class triangle extends Shape{
 
         this.A = pos;
 
+        //What I do here is creating the 3 Points a Triangle has
+        //Becouse this is a Right sided triangle, I can use this simple Calculation 
+        //to get the 2 next points from A and the sides lenght
         Integer X = (int) (this.A.getX() + this.lenght);
         Integer Y = (int) (this.A.getY() + this.lenght);
 
@@ -57,6 +67,7 @@ class triangle extends Shape{
     public double getCircumference(){
         double result = 0;
 
+        //The Circumference is just all it's sides 
         result = this.lenght * 3;
 
         return result;
@@ -66,6 +77,7 @@ class triangle extends Shape{
 
         double result = 0;
 
+        //The area of a triangle is just it's bottom * it's height / 2
         result = (this.lenght * this.lenght) / 2;
 
         return result;
@@ -79,6 +91,7 @@ class triangle extends Shape{
 
     public Point getCenter(){
         
+        //To get the center, we can use this formula
         Integer X = (int) ((this.A.getX() + this.B.getX() + this.C.getX()) / 3);
         Integer Y = (int) ((this.A.getY() + this.B.getY() + this.C.getY()) / 3);
 
@@ -87,13 +100,30 @@ class triangle extends Shape{
         return result;
     }
 
+    public double getEuclidean(Shape shape){
+
+        //First we get the triangles center, and then we get the distance
+        //between that and the other shapes center
+        Integer X = (int) ((this.A.getX() + this.B.getX() + this.C.getX()) / 3);
+        Integer Y = (int) ((this.A.getY() + this.B.getY() + this.C.getY()) / 3);
+
+        Point result = new Point (X,Y);
+
+        return result.distance(shape.getCenter());
+    }
    
 }
+
+
+//
+//--------------------------------------------------------------------------------------
+//
 
 class circle extends Shape{
 
     double radius;
 
+    //initializer the circle class
     public circle(Point pos, double len){
 
         super(pos, len);
@@ -105,6 +135,7 @@ class circle extends Shape{
     public double getArea(){
         double result = 0;
 
+        //Simple area of a circle calculation
         result = this.radius * this.radius * Math.PI;
 
         return result;
@@ -113,6 +144,7 @@ class circle extends Shape{
     public double getCircumference(){
         double result = 0;
 
+        //Simple circumference of a circle calculation
         result = this.radius * 2 * Math.PI;
 
         return result;
@@ -121,6 +153,8 @@ class circle extends Shape{
     public boolean withIn(Point pos){
         boolean result = false;
 
+        //here we check if the distance between the center of the circle
+        //is closer then it's border 
         if(this.position.distance(pos) <= this.radius){
             result = true;
         }
@@ -131,14 +165,24 @@ class circle extends Shape{
         return this.position;
     }
 
+    public double getEuclidean(Shape shape){
+        return this.position.distance(shape.getCenter());
+    }
+
 
 }
+
+//
+//---------------------------------------------------------------------------------------
+//
+
 
 class rectangle extends Shape{
 
     double lenght1;
     double lenght2;
 
+    //initializer the rectangle class
     public rectangle(Point pos, double len1, double len2){
         super(pos, len1);
 
@@ -151,6 +195,7 @@ class rectangle extends Shape{
     public double getArea(){
         double result = 0;
 
+        //Simple calculation for getting the Area
         result = lenght1 *lenght2;
 
         return result;
@@ -159,6 +204,7 @@ class rectangle extends Shape{
     public double getCircumference(){
         double result = 0;
 
+        //Simple calculation for getting the circumference
         result = (lenght1*2)+(lenght2*2);
 
         return result;
@@ -167,6 +213,8 @@ class rectangle extends Shape{
     public boolean withIn(Point pos){
         boolean result = false;
 
+        //Calculating if the given Point, is with in the Shape
+        //This is done by checking if the Point is with in all the different cornors
         if( pos.getX() > this.position.getX() && 
             pos.getX() < this.position.getX() + lenght1 &&
             pos.getY() > this.position.getY() &&
@@ -178,13 +226,27 @@ class rectangle extends Shape{
     }
     public Point getCenter(){
 
+        //Calculating the Shapes center
         Integer X = (int) (this.position.getX() + (lenght1/2));
         Integer Y = (int) (this.position.getY() + (lenght2/2));
 
         Point result = new Point (X,Y);
 
+        //returning the result
         return result;
     }
 
+
+    public double getEuclidean(Shape shape){
+
+        //Starting by getting the center of this Shape
+        Integer X = (int) (this.position.getX() + (lenght1/2));
+        Integer Y = (int) (this.position.getY() + (lenght2/2));
+
+        Point result = new Point (X,Y);
+
+        //Then returning it's distance from the other given shapes center
+        return result.distance(shape.getCenter());
+    }
 
 }
