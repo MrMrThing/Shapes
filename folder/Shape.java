@@ -18,6 +18,16 @@ public abstract class Shape{
         return this.position;
     }
 
+    public abstract double getArea();
+
+    public abstract double getCircumference();
+
+    public abstract boolean withIn(Point pos);
+
+    public abstract Point getCenter();
+
+    public abstract double getEuclidean(Point pos);
+
 }
 
 class triangle extends Shape{
@@ -61,6 +71,23 @@ class triangle extends Shape{
         return result;
     }
 
+    public boolean withIn(Point pos){
+        boolean result = false;
+
+        return result;
+    }
+
+    public Point getCenter(){
+        
+        Integer X = (int) ((this.A.getX() + this.B.getX() + this.C.getX()) / 3);
+        Integer Y = (int) ((this.A.getY() + this.B.getY() + this.C.getY()) / 3);
+
+        Point result = new Point (X,Y);
+
+        return result;
+    }
+
+   
 }
 
 class circle extends Shape{
@@ -100,6 +127,10 @@ class circle extends Shape{
 
         return result;
     }
+    public Point getCenter(){
+        return this.position;
+    }
+
 
 }
 
@@ -145,5 +176,15 @@ class rectangle extends Shape{
 
         return result;
     }
+    public Point getCenter(){
+
+        Integer X = (int) (this.position.getX() + (lenght1/2));
+        Integer Y = (int) (this.position.getY() + (lenght2/2));
+
+        Point result = new Point (X,Y);
+
+        return result;
+    }
+
 
 }
